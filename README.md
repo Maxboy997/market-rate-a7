@@ -17,7 +17,6 @@
 5. **সম্পূর্ণ রেসপন্সিভ ডিজাইন:** মোবাইল, ট্যাবলেট এবং ডেস্কটপ ডিভাইসে সুন্দরভাবে মানানসই ইউজার ইন্টারফেস। 
 
 
-
 # 🛒 BazarDor (Market Price Rate)
 
 A modern web application designed to track the accurate market prices of daily essential commodities, provide market-based price comparisons, and deliver live updates on daily price fluctuations.
