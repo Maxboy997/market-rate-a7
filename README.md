@@ -20,7 +20,7 @@
 
 
 
-# 🛒 BazarDor (Market Price)
+# 🛒 BazarDor (Market Price Rate)
 
 A modern web application designed to track the accurate market prices of daily essential commodities, provide market-based price comparisons, and deliver live updates on daily price fluctuations.
 
