@@ -85,6 +85,21 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="space-y-3">
+        <h2 className="text-lg font-bold text-gray-800">জনপ্রিয় ক্যাটাগরি</h2>
+        <div className="flex flex-wrap gap-2">
+          {["চাল", "ডাল", "তেল", "মাছ", "মাংস", "সবজি", "মসলা"].map((cat, idx) => (
+            <Link
+              key={idx}
+              href={`/category/${cat}`}
+              className="px-4 py-2 bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-700 hover:bg-green-50 hover:border-green-300 hover:text-green-700 transition shadow-sm"
+            >
+              {cat}
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {risers.length > 0 && (
         <section className="space-y-4">
           <div className="flex items-center gap-2 border-b pb-3">
@@ -173,7 +188,7 @@ export default function HomePage() {
               onChange={(e) => setSortBy(e.target.value)}
               className="border border-gray-300 rounded-lg text-sm p-2 bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
             >
-              <option value="default">সাজان: ডিফল্ট</option>
+              <option value="default">সাজান: ডিফল্ট</option>
               <option value="low-to-high">দাম: কম থেকে বেশি</option>
               <option value="high-to-low">দাম: বেশি থেকে কম</option>
             </select>

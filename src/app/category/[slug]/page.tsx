@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState, use } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { LayoutGrid, ArrowUpDown, ArrowLeft } from "lucide-react";
 
-export default function CategoryPage() {
-  const params = useParams();
+export default function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = use(params);
+  const slug = resolvedParams?.slug;
   const router = useRouter();
-  const slug = params?.slug;
 
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -21,12 +21,14 @@ export default function CategoryPage() {
       .then((res) => res.json())
       .then((data) => {
         const list = Array.isArray(data) ? data : data?.data || data?.products || [];
+        const decodedSlug = decodeURIComponent(slug).toLowerCase();
+        
         const filtered = list.filter((item: any) => {
           const itemCat = String(item?.category || item?.categoryNameBn || "").toLowerCase();
-          const targetSlug = String(slug).toLowerCase();
-          return itemCat.includes(targetSlug) || targetSlug.includes(itemCat);
+          return itemCat.includes(decodedSlug) || decodedSlug.includes(itemCat);
         });
-        setProducts(filtered);
+        
+        setProducts(filtered.length > 0 ? filtered : list.slice(0, 8));
         setLoading(false);
       })
       .catch(() => {
@@ -39,7 +41,9 @@ export default function CategoryPage() {
   };
 
   const getChange = (item: any) => {
-    return Number(item?.dir?.pct ?? item?.change ?? item?.price_change ?? 0);
+    const raw = item?.dir?.pct ?? item?.change ?? item?.price_change ?? 0;
+    const num = parseFloat(String(raw).replace(/[^0-9.-]+/g, ""));
+    return isNaN(num) ? 0 : num;
   };
 
   const sortedProducts = [...products].sort((a, b) => {
@@ -88,7 +92,7 @@ export default function CategoryPage() {
         <div className="flex items-center gap-2">
           <LayoutGrid className="w-6 h-6 text-green-600" />
           <h1 className="text-2xl font-bold text-gray-900 capitalize">
-            ক্যাটাগরি: {slug} ({products.length})
+            ক্যাটাগরি: {decodeURIComponent(slug)} ({products.length})
           </h1>
         </div>
 

@@ -40,15 +40,18 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           {session?.user ? (
-            <div className="flex items-center gap-3 bg-green-50 px-3 py-1.5 rounded-full border border-green-200">
-              <div className="flex items-center gap-1.5 text-green-800 font-semibold text-sm">
+            <div className="flex items-center gap-3">
+              <Link
+                href="/profile"
+                className="flex items-center gap-1.5 bg-green-50 px-3 py-1.5 rounded-full border border-green-200 text-green-800 font-semibold text-sm hover:bg-green-100 transition"
+              >
                 <User className="w-4 h-4" />
                 <span>{session.user.name || session.user.email}</span>
-              </div>
+              </Link>
               <button
                 onClick={handleLogout}
                 title="লগআউট"
-                className="text-gray-500 hover:text-red-600 transition"
+                className="text-gray-500 hover:text-red-600 transition p-1.5"
               >
                 <LogOut className="w-4 h-4" />
               </button>
