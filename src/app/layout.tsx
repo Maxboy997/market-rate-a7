@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
@@ -15,10 +16,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="bn">
-      <body className="bg-gray-50 text-gray-900 min-h-screen">
-        <Toaster position="top-right" />
-        <Navbar />
-        {children}
+      <body className="bg-gray-50 text-gray-900 min-h-screen flex flex-col justify-between">
+        <div>
+          <Toaster position="top-right" />
+          <Navbar />
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );
